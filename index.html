@@ -1,0 +1,82 @@
+<html>
+
+<head>
+    <title>Vue JS Teamplate</title>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <h1>After computed: {{ lowercaseTitle }}</h1>
+        <button @click="show" ref="inforButton">Show</button>
+        <p v-if="showParagraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo optio at assumenda
+            eaque aperiam quidem velit eligendi possimus. Et architecto cumque reprehenderit pariatur, molestias vitae
+            non saepe deserunt magni blanditiis?</p>
+    </div>
+
+    <div id="app2">
+        <h1> {{ title }} </h1>
+        <button @click="onChangeTitle">Change something in First Vue Js</button>
+        <hello></hello>
+    </div>
+    <div id="apphello">
+
+    </div>
+    <hello></hello>
+    <script>
+        Vue.component('hello', {
+            template: '<p>Hello Viet Nam</p>',
+        })
+
+        let VN = new Vue({
+            el: '#app',
+            data: {
+                title: 'The Vue JS Instace',
+                showParagraph: false
+            },
+            methods: {
+                updateTitle: function (title) {
+                    this.title = title;
+                },
+                show: function () {
+                    this.showParagraph = true,
+                        this.updateTitle('This Vue JS Instace(Update)'),
+                        console.log(this.$refs),
+                        this.$refs.inforButton.innerText = "vua bam xong"
+
+
+                },
+
+
+            },
+            computed: {
+                lowercaseTitle: function () {
+                    return this.title.toLowerCase();
+                }
+            },
+            watch: {
+                title: function (value) {
+                    alert('Title change, new value: ' + value);
+                }
+
+            }
+        });
+        let TL = new Vue({
+            el: '#app2',
+            data: {
+                title: 'The seacond Vue JS'
+            },
+            methods: {
+                onChangeTitle: function () {
+                    VN.title = 'Change!';
+                }
+            }
+
+        });
+        console.log(VN);
+
+    </script>
+</body>
+
+</html>
